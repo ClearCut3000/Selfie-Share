@@ -5,8 +5,8 @@
 //  Created by Николай Никитин on 03.02.2022.
 //
 
-import MultipeerConnectivity
 import UIKit
+import MultipeerConnectivity
 
 class ViewController: UICollectionViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
 
@@ -19,14 +19,52 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
   //MARK: - UIView lifacycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Selfie Share"
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPromt))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+    setNavigationItems()
     mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
     mcSession?.delegate = self
   }
 
   //MARK: - Methods
+  func setNavigationItems() {
+    title = "Selfie Share"
+    let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPromt))
+    let cameraItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+    let textItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(sendMessage))
+    let currentlyConnected = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showConnected))
+    navigationItem.leftBarButtonItems = [addItem, currentlyConnected]
+    navigationItem.rightBarButtonItems = [textItem, cameraItem]
+  }
+
+  @objc func showConnected() {
+    guard let connected = mcSession?.connectedPeers.description else { return }
+    let alert = UIAlertController(title: "Your devise currently connected with", message: connected, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default))
+    present(alert, animated: true)
+  }
+
+  @objc func sendMessage() {
+    let alert = UIAlertController(title: "Enter text message, please.", message: nil, preferredStyle: .alert)
+    alert.addTextField { UITextField in
+      UITextField.placeholder = "Your text here is..."
+    }
+    alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { [weak self] (_) in
+      guard let message = alert.textFields?[0].text else { return }
+      guard let mcSession = self?.mcSession else { return }
+      let data = Data(message.utf8)
+      if mcSession.connectedPeers.count > 0 {
+        do {
+          try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+        } catch {
+          let errorAlert = UIAlertController(title: "Send Error!", message: error.localizedDescription, preferredStyle: .alert)
+          errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+          self?.present(errorAlert, animated: true)
+        }
+      }
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+    present(alert, animated: true)
+  }
+
   @objc func importPicture() {
     let picker = UIImagePickerController()
     picker.allowsEditing = true
@@ -101,6 +139,9 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
   func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
     switch state {
     case .notConnected:
+      let alert = UIAlertController(title: "User has disconnected", message: peerID.displayName, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default))
+      present(alert, animated: true)
       print ("Not connected: \(peerID.displayName)")
     case .connecting:
       print ("Connecting: \(peerID.displayName)")
@@ -116,17 +157,27 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
       if let image = UIImage(data: data) {
         self?.images.insert(image, at: 0)
         self?.collectionView.reloadData()
+      } else {
+        let text = String(decoding: data, as: UTF8.self)
+        if !text.isEmpty {
+          let alert = UIAlertController(title: "You recived text message from \(peerID.displayName)", message: text, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "OK", style: .default))
+          self?.present(alert, animated: true)
+        }
       }
     }
   }
 
-  func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
+  func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
 
-  func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
+  }
 
-  func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
+  func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
 
+  }
 
+  func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
 
+  }
 }
 

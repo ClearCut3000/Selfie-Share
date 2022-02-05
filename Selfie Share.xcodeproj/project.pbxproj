@@ -13,6 +13,11 @@
 		368BA40627AC5DCF00E6B25D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368BA40427AC5DCF00E6B25D /* Main.storyboard */; };
 		368BA40827AC5DD100E6B25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 368BA40727AC5DD100E6B25D /* Assets.xcassets */; };
 		368BA40B27AC5DD100E6B25D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368BA40927AC5DD100E6B25D /* LaunchScreen.storyboard */; };
+		3697A3D427AECF8400B9287F /* scr001.png in Resources */ = {isa = PBXBuildFile; fileRef = 3697A3CF27AECF8300B9287F /* scr001.png */; };
+		3697A3D527AECF8400B9287F /* scr003.png in Resources */ = {isa = PBXBuildFile; fileRef = 3697A3D027AECF8300B9287F /* scr003.png */; };
+		3697A3D627AECF8400B9287F /* scr004.png in Resources */ = {isa = PBXBuildFile; fileRef = 3697A3D127AECF8400B9287F /* scr004.png */; };
+		3697A3D727AECF8400B9287F /* scr005.png in Resources */ = {isa = PBXBuildFile; fileRef = 3697A3D227AECF8400B9287F /* scr005.png */; };
+		3697A3D827AECF8400B9287F /* scr002.png in Resources */ = {isa = PBXBuildFile; fileRef = 3697A3D327AECF8400B9287F /* scr002.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		368BA40727AC5DD100E6B25D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		368BA40A27AC5DD100E6B25D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		368BA40C27AC5DD100E6B25D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3697A3CF27AECF8300B9287F /* scr001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scr001.png; sourceTree = "<group>"; };
+		3697A3D027AECF8300B9287F /* scr003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scr003.png; sourceTree = "<group>"; };
+		3697A3D127AECF8400B9287F /* scr004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scr004.png; sourceTree = "<group>"; };
+		3697A3D227AECF8400B9287F /* scr005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scr005.png; sourceTree = "<group>"; };
+		3697A3D327AECF8400B9287F /* scr002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scr002.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +50,7 @@
 		368BA3F227AC5DCF00E6B25D = {
 			isa = PBXGroup;
 			children = (
+				3697A3CE27AECEFF00B9287F /* Screenshots */,
 				368BA3FD27AC5DCF00E6B25D /* Selfie Share */,
 				368BA3FC27AC5DCF00E6B25D /* Products */,
 			);
@@ -65,6 +76,18 @@
 				368BA40C27AC5DD100E6B25D /* Info.plist */,
 			);
 			path = "Selfie Share";
+			sourceTree = "<group>";
+		};
+		3697A3CE27AECEFF00B9287F /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				3697A3CF27AECF8300B9287F /* scr001.png */,
+				3697A3D327AECF8400B9287F /* scr002.png */,
+				3697A3D027AECF8300B9287F /* scr003.png */,
+				3697A3D127AECF8400B9287F /* scr004.png */,
+				3697A3D227AECF8400B9287F /* scr005.png */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +149,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				368BA40B27AC5DD100E6B25D /* LaunchScreen.storyboard in Resources */,
+				3697A3D527AECF8400B9287F /* scr003.png in Resources */,
+				3697A3D727AECF8400B9287F /* scr005.png in Resources */,
 				368BA40827AC5DD100E6B25D /* Assets.xcassets in Resources */,
+				3697A3D627AECF8400B9287F /* scr004.png in Resources */,
+				3697A3D427AECF8400B9287F /* scr001.png in Resources */,
 				368BA40627AC5DCF00E6B25D /* Main.storyboard in Resources */,
+				3697A3D827AECF8400B9287F /* scr002.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +320,8 @@
 				DEVELOPMENT_TEAM = CJ7JF497NG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Selfie Share/Info.plist";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "You need to allow permission for hosting and sending";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "You need to allow nearby interraction";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -320,6 +350,8 @@
 				DEVELOPMENT_TEAM = CJ7JF497NG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Selfie Share/Info.plist";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "You need to allow permission for hosting and sending";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "You need to allow nearby interraction";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
