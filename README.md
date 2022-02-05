@@ -8,7 +8,7 @@ Educational multipeer connectivity app allows you to share data over Wi-Fi.
 ![Screenshot004](https://github.com/ClearCut3000/Selfie-Share/blob/main/Screenshots/scr004.png?raw=true)
 ![Screenshot005](https://github.com/ClearCut3000/Selfie-Share/blob/main/Screenshots/scr005.png?raw=true)
 
-For those who plan to repeat the project 25 from Hacking With Swift, here's what you need to add:
+For those who plan to repeat the project 25 from Hacking With Swift in iOS 14.0 - 15.2, here's what you need to add:
 1. Go to Info.plist in your project and 
 
   1.1 delete Application Scene Manifest row.
